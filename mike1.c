@@ -30,8 +30,7 @@ int main(int argc, char * argv[]) {
       printf("Please enter your first name using -fname, your last name using -lname, and your phone number using -number.\n");
     }
 
-    if (strcmp(argv[i], "-fname") == 0) {
-      if (has_another_argument(argc, i) == true) {
+    if (has_another_argument(argc, i) == true) {
         const char * fname = argv[i + 1];
         c1.fname = argv[i + 1];
         i++;
