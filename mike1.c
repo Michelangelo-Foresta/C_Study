@@ -83,7 +83,16 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				i++;
 				printf("Data will be stored to the following file: %s\n", argv[i]);
-					
+				FILE* file;
+				file = fopen(argv[i], "w");
+				if (file == NULL) {
+					printf("I tried one bit at a time at the speed of light but this file could not be opened\nI'm NEVER wrong, so check your shit...\n");
+					return 1;
+				}
+				
+				fprintf(file, "\n****CONTACT DETAILS****\nFirst Name: %s\nLast Name: %s\nPhone Number: %s\n", c1.fname, c1.lname, c1.number);
+				fclose(file);
+				return 0;
 					
 					
 				//printf("%d: %s\n", i, argv[i]);
@@ -101,3 +110,4 @@ int main(int argc, char* argv[]) {
 	printf("\n****Contact List****\nFirst name: %s\nLast name: %s\nPhone number: %s\n", c1.fname, c1.lname, c1.number);
 
 }
+
