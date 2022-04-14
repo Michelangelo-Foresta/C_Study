@@ -10,9 +10,9 @@ bool has_another_argument(int argc, int i) {
 	return false;
 }
 struct Contact {
-	char fname[20];
-	char lname[25];
-	char number[12];
+	char fname[64];
+	char lname[64];
+	char number[13];
 }c1;
 
 
@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 	
 	for (int i = 1; i < argc; i++) {
 		const char* arg = argv[i];
-		printf("%d: %s\n", i, arg);
+		//printf("%d: %s\n", i, arg);
 	
 	
 
@@ -37,8 +37,9 @@ int main(int argc, char* argv[]) {
 		if (has_another_argument(argc, i) == true) {
 			const char* fname = argv[i + 1];
 			i++;
-			strncpy(c1.fname, argv[i], 20);
-			printf("%d: %s\n", i,argv[i]);
+			strncpy(c1.fname, argv[i], 64);
+			c1.fname[64 - 1] = '\0';
+			//printf("%d: %s\n", i,argv[i]);
 		}
 		else {
 			printf("Trying to set first name, but no name provided after -fname\n");
@@ -50,8 +51,9 @@ int main(int argc, char* argv[]) {
 		if (has_another_argument(argc, i) == true) {
 			const char* lname = argv[i + 1];
 			i++;
-			strncpy(c1.lname, argv[i], 25);
-			printf("%d: %s\n", i ,argv[i]);
+			strncpy(c1.lname, argv[i], 64);
+			c1.lname[64 - 1] = '\0';
+			//printf("%d: %s\n", i ,argv[i]);
 
 		}
 		else {
@@ -64,8 +66,9 @@ int main(int argc, char* argv[]) {
 		if (has_another_argument(argc, i) == true) {
 			const char* number = argv[i + 1];
 			i++;
-			strncpy(c1.number, argv[i], 12);
-			printf("%d: %s\n",i,argv[i]);
+			strncpy(c1.number, argv[i], 13);
+			c1.number[13 - 1] = '\0';
+			//printf("%d: %s\n",i,argv[i]);
 		}
 		else {
 			printf("Trying to set number, but no number provided after -number\n");
