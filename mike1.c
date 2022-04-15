@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	FILE* file;
-	file = fopen(filepath, "w");
+	file = fopen(filepath, "ab+");
 	if (file == NULL) {
 		fprintf(stderr,"\nError opened file\n");
 		return 1;
