@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <time.h>
 #include <linux/limits.h>
-#include <time.h>
 
 bool has_another_argument(int argc, int i) {
 	//printf("argc: %d; i: %d\n", argc, i);
@@ -37,6 +36,10 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* fname = argv[i + 1];
 				i++;
+				if (strlen(argv[i]) > 63) {
+					printf("Your First name should not be longer than 63 characters.\n");
+					return 1;
+				}
 				strncpy(c1.fname, argv[i], 64);
 				c1.fname[64 - 1] = '\0';
 				//printf("%d: %s\n", i,argv[i]);
@@ -50,6 +53,10 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* lname = argv[i + 1];
 				i++;
+				if (strlen(argv[i]) > 63) {
+					printf("Your Last name should not be longer than 63 characters.\n");
+					return 1;
+				}
 				strncpy(c1.lname, argv[i], 64);
 				c1.lname[64 - 1] = '\0';
 				//printf("%d: %s\n", i ,argv[i]);
@@ -63,6 +70,10 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* number = argv[i + 1];
 				i++;
+				if (strlen(argv[i]) > 12) {
+					printf("Your number should not be longer than 12 characters.\n");
+					return 1;
+				}
 				strncpy(c1.number, argv[i], 13);
 				c1.number[13 - 1] = '\0';
 				//printf("%d: %s\n",i,argv[i]);
