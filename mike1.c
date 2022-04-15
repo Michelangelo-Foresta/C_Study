@@ -21,12 +21,12 @@ struct Contact {
 
 
 int main(int argc, char* argv[]) {
-char filepath[PATH_MAX];
-clock_t start_clock, stop_clock;
+	char filepath[PATH_MAX];
+	clock_t start_clock, stop_clock;
 	start_clock = clock();
 	for (int i = 1; i < argc; i++) {
 		const char* arg = argv[i];
-		printf("%d: %s\n", i, arg);
+		//printf("%d: %s\n", i, arg);
 
 		// && strcmp(argv[i], "-o" != 0) && strcmp(argv[i], "-fname" != 0) && strcmp(argv[i], "-lname" != 0) && strcmp(argv[i], "-number" != 0)
 		if (strcmp(argv[i], "--help") == 0 && argc >= 2) {
@@ -39,7 +39,7 @@ clock_t start_clock, stop_clock;
 				i++;
 				strncpy(c1.fname, argv[i], 64);
 				c1.fname[64 - 1] = '\0';
-				printf("%d: %s\n", i,argv[i]);
+				//printf("%d: %s\n", i,argv[i]);
 			}
 			else {
 				printf("Trying to set first name, but no name provided after -fname\n");
@@ -52,7 +52,7 @@ clock_t start_clock, stop_clock;
 				i++;
 				strncpy(c1.lname, argv[i], 64);
 				c1.lname[64 - 1] = '\0';
-				printf("%d: %s\n", i ,argv[i]);
+				//printf("%d: %s\n", i ,argv[i]);
 			}
 			else {
 				printf("Trying to set last name, but no name provided after -lname\n");
@@ -65,7 +65,7 @@ clock_t start_clock, stop_clock;
 				i++;
 				strncpy(c1.number, argv[i], 13);
 				c1.number[13 - 1] = '\0';
-				printf("%d: %s\n",i,argv[i]);
+				//printf("%d: %s\n",i,argv[i]);
 			}
 			else {
 				printf("Trying to set number, but no number provided after -number\n");
@@ -78,29 +78,33 @@ clock_t start_clock, stop_clock;
 				i++;
 				strncpy(filepath, argv[i], 260);
 				filepath[260 - 1] = '\0';
-				printf("%d: %s\n", i, argv[i]);
+				//printf("%d: %s\n", i, argv[i]);
 			}
 			else {
 				printf("Sorry there was not file path provided.\n");
 			}
 		}
-		
 	}
 
+	FILE* file;
+	file = fopen(filepath, "w");
+	if (file == NULL) {
+		fprintf(stderr,"\nError opened file\n");
+		return 1;
+	}	
+	//printf("Data has been stored to the following file: %s\n", filepath);
+	fwrite(&c1, sizeof(struct Contact),1,file);
 
-FILE *file = fopen(filepath,"w");
-if (file == 0) {
-	printf("I've tried one bit at a time nearly at the speed of light but this file could not be opened\nI NEVER make mistakes, so check your shit...\n");
-	return 1;
-}
-else {
-	printf("Data has been stored to the following file: %s\n", filepath);
-	fprintf(file, "\n****CONTACT DETAILS****\nFirst Name: %s\nLast Name: %s\nPhone Number: %s\n", c1.fname, c1.lname, c1.number);
+	if (fwrite != 0) {
+		printf("Structure has been written!\n");
+	}
+	else {
+		printf("Error writing to file.\n");
+	}
 	fclose(file);
-}
-	
-stop_clock = clock();
-double time_elapsed = (double)(stop_clock - start_clock) / CLOCKS_PER_SEC;
-printf("\nTime Elapsed: %lf\n",time_elapsed);
 
+	
+	stop_clock = clock();
+	double time_elapsed = (double)(stop_clock - start_clock) / CLOCKS_PER_SEC;
+	printf("\nTime Elapsed: %lf\n",time_elapsed);
 }
