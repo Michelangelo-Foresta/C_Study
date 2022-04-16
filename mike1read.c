@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <linux/limits.h>
 #include <stdlib.h>
+#include "contact.h"
 
 bool is_another_argument(int argc, int i) {
 	if ((i + 1) < argc)
@@ -10,15 +11,9 @@ bool is_another_argument(int argc, int i) {
 	return false;
 }
 
-struct Contact {
-	char fname[64];
-	char lname[64];
-	char number[13];
-};
-
 int main(int argc, char* argv[]) {
 	char filename[PATH_MAX];
-	
+
 	for (int i = 1; i < argc; i++) {
 		const char *arg = argv[i];
 		printf("%d : %s\n", i, arg);
@@ -40,7 +35,9 @@ int main(int argc, char* argv[]) {
 		fprintf(stderr, "Sorry %s could not be opened.\n", filename);
 		return 1;
 	}
+
 	while (fread(&input, sizeof(struct Contact), 1, file))
-		printf("%64s %64s %13s\n", input.fname, input.lname, input.number);
+	printf("%64s %64s %13s\n", input.fname, input.lname, input.number);
+	
 	fclose(file);
 }

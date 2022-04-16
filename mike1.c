@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <linux/limits.h>
+#include "contact.h"
 
 bool has_another_argument(int argc, int i) {
 	//printf("argc: %d; i: %d\n", argc, i);
@@ -10,14 +11,6 @@ bool has_another_argument(int argc, int i) {
 		return true;
 	return false;
 }
-
-struct Contact {
-	char fname[64];
-	char lname[64];
-	char number[13];
-}c1;
-
-
 
 int main(int argc, char* argv[]) {
 	char filepath[PATH_MAX];
@@ -98,7 +91,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	FILE* file;
-	file = fopen(filepath, "ab+");
+	file = fopen(filepath, "wb");
 	if (file == NULL) {
 		fprintf(stderr,"\nError opened file\n");
 		return 1;
