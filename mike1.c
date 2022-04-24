@@ -29,11 +29,11 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* fname = argv[i + 1];
 				i++;
-				contact_write_fname(c, argv[i]);
-				if(contact_write_fname(c,argv[i])==Error_too_long){
+				int func = contact_write_fname(c, argv[i]);
+				if(func ==Error_too_long){
 					printf("First name should not be longer than %d characters.\n", Fname_len);
 				}
-				if(contact_write_fname(c,argv[i]) == Error_too_short){
+				if(func == Error_too_short){
 					printf("First name should be longer than 1 character.\n");
 				}
 				
@@ -47,11 +47,11 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* lname = argv[i + 1];
 				i++;
-				contact_write_lname(c,argv[i]);
-				if(contact_write_lname(c,argv[i])==Error_too_long){
+				int func = contact_write_lname(c,argv[i]);
+				if(func ==Error_too_long){
 					printf("Last name should not be longer than %d characters.\n", Lname_len);
 				}
-				if(contact_write_lname(c,argv[i]) == Error_too_short){
+				if(func == Error_too_short){
 					printf("Last name should be longer than 1 character.\n");
 				}
 				
@@ -65,14 +65,13 @@ int main(int argc, char* argv[]) {
 			if (has_another_argument(argc, i) == true) {
 				const char* number = argv[i + 1];
 				i++;
-				contact_write_number(c,argv[i]);
-				if(contact_write_number(c,argv[i])==Error_too_long){
+				int func = contact_write_number(c,argv[i]);
+				if(func == Error_too_long){
 					printf("Phone number should not be longer than %d characters.\n", Number_len);
 				}
-				if(contact_write_number(c,argv[i]) == Error_too_short){
+				if(func == Error_too_short){
 					printf("Phone number should not be less than 1 character.\n");
 				}
-				
 			}
 			else {
 				printf("Trying to set number, but no number provided after -number\n");
