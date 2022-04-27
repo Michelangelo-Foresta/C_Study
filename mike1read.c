@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include "contact.h"
 
-const char *Contact_read_fname(struct Contact *c){
-return c->fname;
+const char *Contact_read_fname(const struct Contact *c){
+	return c->fname;
 }
-const char *Contact_read_lname(struct Contact *c){
-return c->lname;
+const char *Contact_read_lname(const struct Contact *c){
+	return c->lname;
 }
-const char *Contact_read_number(struct Contact *c){
-return c->number;
+const char *Contact_read_number(const struct Contact *c){
+	return c->number;
 
 }
 
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	FILE* file;
-	struct Contact *c;
+	struct Contact c;
 	file = fopen(filename, "rb");
 	if (file == NULL) {
 		fprintf(stderr, "Sorry %s could not be opened.\n", filename);
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	while (fread(&c, sizeof(struct Contact), 1, file))
-	printf("%s %64s %13s\n", Contact_read_fname(c),Contact_read_lname(c),Contact_read_number(c));
+	printf("%64s %64s %13s\n", Contact_read_fname(&c),Contact_read_lname(&c),Contact_read_number(&c));
 	
 	fclose(file);
 }
