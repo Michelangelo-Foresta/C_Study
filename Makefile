@@ -17,9 +17,12 @@ mike1: mike1.c
 mikeread: contact.so mike1read.c
 	gcc mike1read.c ./libcontact.so -o mr
 
-all: mike1
-	./m -fname Johnnny -lname ir -number 5144857392 -o /home/michelangelo/Desktop/Hi.txt
-
 all: mike1 mikeread
 	./m -fname Johnnny -lname ir -number 5144857392 -o Hi.contact
 	./mr -o Hi.contact
+
+test: mike1
+	./m -fname jogdhe -lname kdiehr -number 4364320095 -o /home/michelangelo/Desktop/Hi.txt
+
+testmr: mikeread
+	./mr -o /home/michelangelo/Desktop/Hi.txt
