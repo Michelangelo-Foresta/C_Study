@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 				i++;
 				int func = contact_write_fname(c, argv[i]);
 				if(func ==Error_too_long){
-					printf("First name should not be longer than %d characters.\n", Fname_len);
+					printf("First name should not be longer than 58 characters.\n"/* Fname_len*/);
 				}
 				if(func == Error_too_short){
 					printf("First name should be longer than 1 character.\n");
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 				i++;
 				int func = contact_write_lname(c,argv[i]);
 				if(func ==Error_too_long){
-					printf("Last name should not be longer than %d characters.\n", Lname_len);
+					printf("Last name should not be longer than 57 characters.\n" /*,Lname_len*/);
 				}
 				if(func == Error_too_short){
 					printf("Last name should be longer than 1 character.\n");
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
 				i++;
 				int func = contact_write_number(c,argv[i]);
 				if(func == Error_too_long){
-					printf("Phone number should not be longer than %d characters.\n", Number_len);
+					printf("Phone number should not be longer than 11 characters.\n"/* ,Number_len*/);
 				}
 				if(func == Error_too_short){
 					printf("Phone number should not be less than 1 character.\n");
@@ -97,13 +97,12 @@ int main(int argc, char* argv[]) {
 	if (file == NULL) {
 		fprintf(stderr,"\nError opened file\n");
 		return 1;
-	}	
-	fwrite(c, sizeof(struct Contact),1,file);
-
-	if (fwrite != 0) {
+	}
+	int rc = contact_write(c,file);
+	if (rc == 1) {
 		printf("Structure has been written!\n");
 	}
-	else {
+	else if (rc == 0) {
 		printf("Error writing to file.\n");
 	}
 	contact_free(c);
