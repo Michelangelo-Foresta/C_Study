@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "contact.h"
+#include "contact_internal.h"
 #define Error_too_long 3
 #define Error_too_short 2
+
 
 
 /*Pass POINTER TO STRUCT THROUGH MALLOC*/
@@ -48,6 +50,17 @@ int contact_write_number(struct Contact* c, const char* s) {
 	}  
 	strncpy(c->number, s ,strlen(s));
 	return 0;
+}
+
+// Write contents of structure
+int contact_write(struct Contact* c,void* fd){
+	int res = fwrite(c, sizeof(struct Contact *),1,fd);
+	if (res != 0) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
 }
 
 // END OF WRITE
