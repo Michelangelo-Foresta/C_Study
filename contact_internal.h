@@ -9,6 +9,4 @@ struct Contact {
         char lname[Lname_len];
         char number[Number_len];
 };
-
-struct Contact;
 #endif

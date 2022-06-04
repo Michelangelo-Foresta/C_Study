@@ -12,7 +12,7 @@ mike1:  contact.so
 
 mike1: mike1.c
 	# Make the rest work using the above tutorial
-	gcc mike1.c ./libcontact.so -o m
+	gcc -g mike1.c ./libcontact.so -o m
 
 mikeread: contact.so mike1read.c
 	gcc mike1read.c ./libcontact.so -o mr

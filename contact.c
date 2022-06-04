@@ -54,13 +54,14 @@ int contact_write_number(struct Contact* c, const char* s) {
 
 // Write contents of structure
 int contact_write(struct Contact* c,void* fd){
-	int res = fwrite(c, sizeof(struct Contact *),1,fd);
+	int res = fwrite(c, sizeof(*c),1,fd);
 	if (res != 0) {
+		printf("Structure has been written!\n");
 		return 1;
 	}
 	else {
+		printf("Error writing to file.\n");
 		return 0;
 	}
 }
-
 // END OF WRITE
